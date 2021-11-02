@@ -1,0 +1,62 @@
+{
+	"name": "dirty-bot",
+	"private": true,
+	"type": "module",
+	"version": "0.0.0",
+	"main": "build/index.js",
+	"prettier": "@typescord/prettier-config",
+	"scripts": {
+		"dev": "nodemon -w crates -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
+		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty",
+		"build": "yarn build-rs && yarn build-ts",
+		"build-debug": "yarn build-rs-debug && yarn build-ts",
+		"build-ts": "tsc",
+		"build-rs": "napi build --platform --release --cargo-cwd crates/binding .",
+		"build-rs-debug": "napi build --platform --cargo-cwd crates/binding .",
+		"version": "napi version",
+		"lint": "yarn eslint && yarn clippy",
+		"lint-fix": "yarn eslint-fix && yarn clippy-fix",
+		"eslint": "eslint . --ext js,ts",
+		"eslint-fix": "yarn lint --fix",
+		"clippy": "cargo clippy",
+		"clippy-fix": "cargo fix --clippy",
+		"format": "yarn prettier && yarn format-rs",
+		"prettier": "prettier . --write",
+		"format-rs": "cargo fmt",
+		"check-types": "tsc --noEmit"
+	},
+	"engines": {
+		"node": ">=16"
+	},
+	"dependencies": {
+		"@node-rs/helper": "^1.0.0",
+		"discord.js": "^13.3.1",
+		"pino": "^7.0.5"
+	},
+	"devDependencies": {
+		"@napi-rs/cli": "^1.0.0",
+		"@types/node": "^16.9.3",
+		"@types/pino": "^6.3.12",
+		"@typescord/eslint-config": "^0.4.0",
+		"@typescord/prettier-config": "^0.1.2",
+		"@typescript-eslint/eslint-plugin": "^4.30.0",
+		"@typescript-eslint/parser": "^4.30.0",
+		"dotenv": "^10.0.0",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-import-resolver-node": "^0.3.6",
+		"eslint-plugin-import": "^2.24.2",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-simple-import-sort": "^7.0.0",
+		"eslint-plugin-sonarjs": "^0.10.0",
+		"eslint-plugin-unicorn": "^35.0.0",
+		"nodemon": "^2.0.14",
+		"pino-pretty": "^7.1.0",
+		"prettier": "^2.3.2",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.4.2"
+	},
+	"volta": {
+		"node": "16.9.0"
+	}
+}

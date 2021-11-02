@@ -1,0 +1,14 @@
+[package]
+name = "dbackend"
+description = "The DirtyBot backend crate"
+publish = false
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+diesel = "1.4"
+web3 = { git = "https://github.com/tomusdrw/rust-web3" }
+tokio = "1.13"
+log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
+fern = "0.6"
+chrono = "0.4"
