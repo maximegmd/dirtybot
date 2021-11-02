@@ -1,0 +1,11 @@
+root: true
+extends: ['@typescord', prettier]
+plugins: [prettier]
+parserOptions:
+  sourceType: module
+  project: tsconfig.json
+rules:
+  prettier/prettier: error
+  import/no-unresolved: off
+env:
+  node: true

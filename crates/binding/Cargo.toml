@@ -1,0 +1,19 @@
+[package]
+name = "dbinding"
+edition = "2018"
+version = "0.0.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2.0.0-alpha.1", features = ["full"] }
+napi-derive = { version = "2.0.0-alpha.1", features = ["type-def"] }
+dbackend = { path = "../backend" }
+
+[build-dependencies]
+napi-build = "1.1.0"
+
+[target.'cfg(all(any(windows, unix), target_arch = "x86_64", not(target_env = "musl")))'.dependencies]
+mimalloc = "0.1.26"

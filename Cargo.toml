@@ -1,16 +1,9 @@
-[package]
-name = "dirtybot"
-version = "0.1.0"
-edition = "2018"
+[workspace]
+members = [
+  "./crates/backend",
+  "./crates/binding",
+]
 
-[dependencies]
-serenity = "0.10"
-diesel = "1.4"
-web3 = { git = "https://github.com/tomusdrw/rust-web3" }
-envconfig = "0.10"
-envconfig_derive = "0.10"
-dotenv = "0.15"
-tokio = "1.13"
-log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
-fern = "0.6"
-chrono = "0.4"
+[profile.release]
+lto = true
+opt-level = 3
