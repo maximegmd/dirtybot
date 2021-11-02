@@ -1,5 +1,8 @@
+#[derive(Debug, Clone)]
 pub enum DirtyError {
-    Blockchain(web3::Error)
+    Blockchain(web3::Error),
+    InvalidAddress,
+    InvalidPassphrase
 }
 
 impl From<web3::Error> for DirtyError {

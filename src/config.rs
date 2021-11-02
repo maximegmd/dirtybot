@@ -7,4 +7,7 @@ pub struct Config {
 
     #[envconfig(from = "DISCORD_TOKEN")]
     pub discord_token: String,
+
+    #[envconfig(from = "PASSPHRASE")]
+    pub passphrase: String,
 }

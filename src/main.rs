@@ -1,4 +1,6 @@
 use envconfig::Envconfig;
+use errors::DirtyError;
+use log::error;
 
 #[macro_use]
 extern crate envconfig_derive;
@@ -26,13 +28,17 @@ fn setup_logger() -> Result<(), fern::InitError> {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), fern::InitError> {
+async fn main() -> Result<(), DirtyError> {
 
-    setup_logger()?;
+    setup_logger().expect("Logger could not be created!");
 
     dotenv::dotenv().ok();
 
     let config = config::Config::init_from_env().unwrap();
+    let mut blockchain = blockchain::Blockchain::new(&config)?;
+    let balance = blockchain.get_balance("0x454FaCBA3caA2aD8F5639317847231efb7fa558C".into()).await?;
+    error!("Balance: {}", balance);
+    /*blockchain.deposit().await;*/
 
     return Ok(());
 }
