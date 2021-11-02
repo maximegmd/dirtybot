@@ -1,8 +1,16 @@
 pub mod blockchain;
 pub mod config;
 pub mod errors;
+pub mod interface;
+pub mod schema;
+pub mod models;
+pub mod db;
 
-fn setup_logger() -> Result<(), fern::InitError> {
+#[macro_use]
+extern crate diesel;
+
+
+fn _setup_logger() -> Result<(), fern::InitError> {
     fern::Dispatch::new()
         .format(|out, message, record| {
             out.finish(format_args!(
