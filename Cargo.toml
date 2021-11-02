@@ -4,3 +4,10 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
+serenity = "0.10"
+diesel = "1.4"
+web3 = { git = "https://github.com/tomusdrw/rust-web3" }
+envconfig = "0.10"
+envconfig_derive = "0.10"
+dotenv = "0.15"
+tokio = "1.13"
