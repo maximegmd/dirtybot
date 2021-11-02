@@ -259,10 +259,13 @@ dependencies = [
 name = "dirtybot"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "diesel",
  "dotenv",
  "envconfig",
  "envconfig_derive",
+ "fern",
+ "log",
  "serenity",
  "tokio",
  "web3",
@@ -344,6 +347,15 @@ dependencies = [
  "impl-serde",
  "primitive-types",
  "uint",
+]
+
+[[package]]
+name = "fern"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8c9a4820f0ccc8a7afd67c39a0f1a0f4b07ca1725164271a64939d7aeb9af065"
+dependencies = [
+ "log",
 ]
 
 [[package]]

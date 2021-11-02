@@ -11,3 +11,6 @@ envconfig = "0.10"
 envconfig_derive = "0.10"
 dotenv = "0.15"
 tokio = "1.13"
+log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
+fern = "0.6"
+chrono = "0.4"
