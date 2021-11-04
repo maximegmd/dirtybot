@@ -7,5 +7,6 @@ parserOptions:
 rules:
   prettier/prettier: error
   import/no-unresolved: off
+  unicorn/prevent-abbreviations: off
 env:
   node: true

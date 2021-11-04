@@ -1,2 +1,2 @@
 .yarn
-watcher.js
+src/binding-types.ts
