@@ -6,13 +6,13 @@
 	"main": "build/index.js",
 	"prettier": "@typescord/prettier-config",
 	"scripts": {
-		"dev": "nodemon -w crates -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
+		"dev": "nodemon -w backend -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
 		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty",
 		"build": "yarn build-rs && yarn build-ts",
 		"build-debug": "yarn build-rs-debug && yarn build-ts",
 		"build-ts": "tsc",
-		"build-rs": "napi build --platform --release --cargo-cwd crates/binding .",
-		"build-rs-debug": "napi build --platform --cargo-cwd crates/binding .",
+		"build-rs": "yarn build-rs-debug --release",
+		"build-rs-debug": "napi build --platform --dts src/binding-types.ts",
 		"version": "napi version",
 		"lint": "yarn eslint && yarn clippy",
 		"lint-fix": "yarn eslint-fix && yarn clippy-fix",
@@ -29,32 +29,32 @@
 		"node": ">=16"
 	},
 	"dependencies": {
-		"@node-rs/helper": "^1.0.0",
+		"@node-rs/helper": "^1.2.1",
 		"discord.js": "^13.3.1",
-		"pino": "^7.0.5"
+		"pino": "^7.1.0"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "^1.0.0",
-		"@types/node": "^16.9.3",
+		"@napi-rs/cli": "^2.0.0-alpha.3",
+		"@types/node": "^16.11.6",
 		"@types/pino": "^6.3.12",
-		"@typescord/eslint-config": "^0.4.0",
-		"@typescord/prettier-config": "^0.1.2",
-		"@typescript-eslint/eslint-plugin": "^4.30.0",
-		"@typescript-eslint/parser": "^4.30.0",
+		"@typescord/eslint-config": "^0.5.0",
+		"@typescord/prettier-config": "^0.2.0",
+		"@typescript-eslint/eslint-plugin": "^4.33.0",
+		"@typescript-eslint/parser": "^4.33.0",
 		"dotenv": "^10.0.0",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-import-resolver-node": "^0.3.6",
-		"eslint-plugin-import": "^2.24.2",
+		"eslint-plugin-import": "^2.25.2",
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-simple-import-sort": "^7.0.0",
 		"eslint-plugin-sonarjs": "^0.10.0",
-		"eslint-plugin-unicorn": "^35.0.0",
+		"eslint-plugin-unicorn": "^37.0.1",
 		"nodemon": "^2.0.14",
-		"pino-pretty": "^7.1.0",
-		"prettier": "^2.3.2",
+		"pino-pretty": "^7.2.0",
+		"prettier": "^2.4.1",
 		"ts-node": "^10.4.0",
-		"typescript": "^4.4.2"
+		"typescript": "^4.4.4"
 	},
 	"volta": {
 		"node": "16.9.0"

@@ -1,9 +1,28 @@
-[workspace]
-members = [
-  "./crates/backend",
-  "./crates/binding",
-]
+[package]
+name = "dbackend"
+description = "The Dirty Bot backend crate"
+publish = false
+version = "0.0.0"
+edition = "2018"
 
-[profile.release]
-lto = true
-opt-level = 3
+[lib]
+crate-type = ["cdylib"]
+path = "backend/lib.rs"
+
+[dependencies]
+web3 = "0.17.0"
+log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
+fern = "0.6"
+chrono = "0.4"
+secp256k1 = {version = "0.20", features = ["rand-std"] }
+tiny-hderive = "0.3"
+bip39 = "1.0"
+diesel = { version = "1.4.8", features = ["sqlite"] }
+napi = { version = "2.0.0-alpha.1", features = ["full"] }
+napi-derive = { version = "2.0.0-alpha.1", features = ["type-def"] }
+
+[build-dependencies]
+napi-build = "1.1.1"
+
+[target.'cfg(all(any(windows, unix), target_arch = "x86_64", not(target_env = "musl")))'.dependencies]
+mimalloc = "0.1.26"

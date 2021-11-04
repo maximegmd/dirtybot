@@ -2,5 +2,5 @@
 .yarn
 Cargo.lock
 yarn.lock
-crates/*
-!crates/*/Cargo.toml
+backend
+src/binding-types.ts
