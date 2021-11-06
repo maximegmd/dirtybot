@@ -8,6 +8,7 @@
 	"scripts": {
 		"dev": "nodemon -w backend -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
 		"dev-ts": "nodemon -w src -e ts -x \"yarn start-ts\"",
+		"start-debug": "yarn build-rs-debug && node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty -t",
 		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty -t",
 		"build": "yarn build-rs && yarn build-ts",
 		"build-debug": "yarn build-rs-debug && yarn build-ts",
