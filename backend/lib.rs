@@ -3,6 +3,9 @@ extern crate diesel;
 #[macro_use]
 extern crate napi_derive;
 
+use napi::bindgen_prelude::*;
+use tinyjson::JsonValue;
+
 mod blockchain;
 pub mod context;
 mod errors;
@@ -18,19 +21,29 @@ mod schema;
 #[global_allocator]
 static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
-fn _setup_logger() -> Result<(), fern::InitError> {
+#[napi]
+pub fn setup_logger() -> Result<()> {
+	let hostname = JsonValue::String(hostname::get()?.into_string().unwrap())
+		.stringify()
+		.unwrap();
+
+	let pid = std::process::id();
+
 	fern::Dispatch::new()
-		.format(|out, message, record| {
+		.format(move |out, message, record| {
 			out.finish(format_args!(
-				"{}[{}][{}] {}",
-				chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
-				record.target(),
-				record.level(),
-				message
+				"{{\"level\":{},\"time\":{},\"msg\":{},\"pid\":{},\"hostname\":{}}}",
+				60 - (record.level() as usize) * 10,
+				chrono::Utc::now().timestamp_millis(),
+				JsonValue::String(message.to_string()).stringify().unwrap(),
+				pid,
+				hostname,
 			))
 		})
 		.level(log::LevelFilter::Debug)
 		.chain(std::io::stdout())
-		.apply()?;
+		.apply()
+		.map_err(|e| Error::from_reason(e.to_string()))?;
+
 	Ok(())
 }

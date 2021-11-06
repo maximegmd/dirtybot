@@ -8,7 +8,7 @@ use web3::types::U256;
 impl From<DirtyError> for Error {
 	fn from(e: DirtyError) -> Error {
 		let status = match e {
-			DirtyError::Blockchain(_) => Status::Unknown,
+			DirtyError::Blockchain(_) => Status::GenericFailure,
 			_ => Status::InvalidArg,
 		};
 		Error::new(status, e.to_string())
@@ -36,7 +36,7 @@ impl Context {
 			ConnectionError::InvalidCString(_) | ConnectionError::InvalidConnectionUrl(_) => {
 				Error::new(Status::InvalidArg, e.to_string())
 			}
-			_ => Error::new(Status::Unknown, e.to_string()),
+			_ => Error::from_reason(e.to_string()),
 		})?;
 
 		let blockchain = Blockchain::new(&config.rpc_endpoint, &config.passphrase)?;
@@ -47,21 +47,27 @@ impl Context {
 		})
 	}
 
-	pub async fn withdraw(&self, _user_id: String, _addr: String, _value: U256) {}
+	pub fn withdraw(&self, _user_id: String, _addr: String, _value: U256) {
+		todo!();
+	}
 
-	pub async fn deposit(&self, _user_id: String) {}
+	pub fn deposit(&self, _user_id: String) {
+		todo!();
+	}
 
-	pub async fn send(&self, _user_id: String, _value: U256) {}
+	pub fn send(&self, _user_id: String, _value: U256) {
+		todo!();
+	}
 
-	pub async fn balance(&self, user_id: String) -> Result<String> {
+	#[napi]
+	pub fn balance(&self, user_id: String) -> Result<String> {
 		users
 			.find(user_id)
 			.select(amount)
 			.first::<String>(&self.db_connection)
 			.map_err(|e| match e {
-				DbError::NotFound => Error::new(Status::Unknown, "User not found".to_string()),
-				DbError::InvalidCString(_) => unreachable!(),
-				_ => Error::new(Status::Unknown, e.to_string()),
+				DbError::NotFound => Error::from_reason("User not found".into()),
+				_ => Error::from_reason(e.to_string()),
 			})
 	}
 }

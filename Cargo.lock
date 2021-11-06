@@ -261,6 +261,7 @@ dependencies = [
  "chrono",
  "diesel",
  "fern",
+ "hostname",
  "log",
  "mimalloc",
  "napi",
@@ -268,6 +269,7 @@ dependencies = [
  "napi-derive",
  "secp256k1",
  "tiny-hderive",
+ "tinyjson",
  "web3",
 ]
 
@@ -674,6 +676,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "hostname"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3c731c3e10504cc8ed35cfe2f1db4c9274c3d35fa486e3b31df46f068ef3e867"
+dependencies = [
+ "libc",
+ "match_cfg",
+ "winapi",
+]
+
+[[package]]
 name = "http"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -920,6 +933,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "match_cfg"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ffbee8634e0d45d258acb448e7eaab3fce7a0a467395d4d9f228e3c1f01fb2e4"
+
+[[package]]
 name = "matches"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -982,9 +1001,9 @@ dependencies = [
 
 [[package]]
 name = "napi"
-version = "2.0.0-alpha.1"
+version = "2.0.0-alpha.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "98bec066ff20739eb69a6ccdc254a1fa5e07d822987b10707645961d79e4535d"
+checksum = "19affb9ddd04353e55763ab748a60f8891c79b3469d6e526548bb0e613db8cb6"
 dependencies = [
  "ctor",
  "encoding_rs",
@@ -1004,9 +1023,9 @@ checksum = "87375bacff0768dd606ccf870eae936efd21e3245af9e7b37ae44f969d48be8a"
 
 [[package]]
 name = "napi-derive"
-version = "2.0.0-alpha.1"
+version = "2.0.0-alpha.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81ac06bbee619fdc78860bfd7c75a0c09a24999319a84c86661a06ffe2f1933a"
+checksum = "7a27a03450ecdaf4a3c878e4a6805351757de47cec65912ec93419ba64eba31c"
 dependencies = [
  "convert_case",
  "napi-derive-backend",
@@ -1017,9 +1036,9 @@ dependencies = [
 
 [[package]]
 name = "napi-derive-backend"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a75cd79a30276093167fbc724d1b7adafe10b5f87ed5e703682ed88dde39fca"
+checksum = "b9691975a3e6de370bc9f3775812f8882e01aaf4260946368f6ca2ba3ef2e406"
 dependencies = [
  "convert_case",
  "once_cell",
@@ -1919,6 +1938,12 @@ checksum = "2c9d3793400a45f954c52e73d068316d76b6f4e36977e3fcebb13a2721e80237"
 dependencies = [
  "crunchy",
 ]
+
+[[package]]
+name = "tinyjson"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1a8304da9f9370f6a6f9020b7903b044aa9ce3470f300a1fba5bc77c78145a16"
 
 [[package]]
 name = "tokio"

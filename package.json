@@ -7,12 +7,13 @@
 	"prettier": "@typescord/prettier-config",
 	"scripts": {
 		"dev": "nodemon -w backend -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
-		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty",
+		"dev-ts": "nodemon -w src -e ts -x \"yarn start-ts\"",
+		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty -t",
 		"build": "yarn build-rs && yarn build-ts",
 		"build-debug": "yarn build-rs-debug && yarn build-ts",
 		"build-ts": "tsc",
 		"build-rs": "yarn build-rs-debug --release",
-		"build-rs-debug": "napi build --platform --dts src/binding-types.ts",
+		"build-rs-debug": "napi build --dts src/binding-types.d.ts",
 		"version": "napi version",
 		"lint": "yarn eslint && yarn clippy",
 		"lint-fix": "yarn eslint-fix && yarn clippy-fix",
@@ -29,7 +30,6 @@
 		"node": ">=16"
 	},
 	"dependencies": {
-		"@node-rs/helper": "^1.2.1",
 		"discord.js": "^13.3.1",
 		"pino": "^7.1.0"
 	},

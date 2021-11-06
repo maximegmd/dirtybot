@@ -1,13 +1,13 @@
 use std::str::FromStr;
 
-use log::info;
+use crate::errors::DirtyError;
 use bip39::{Language, Mnemonic};
+use log::info;
 use secp256k1::{PublicKey, Secp256k1, SecretKey};
 use tiny_hderive::bip32::ExtendedPrivKey;
 use web3::types::{Address, TransactionParameters, TransactionRequest, H160, U256};
-use crate::errors::DirtyError;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Blockchain {
 	web3: web3::Web3<web3::transports::Http>,
 	base_key: ExtendedPrivKey,
@@ -20,7 +20,7 @@ impl Blockchain {
 		info!("Blockchain transport bound to {}", rpc_endpoint);
 
 		let mnemonic = Mnemonic::parse_in(Language::English, passphrase)
-			.map_err(|_| DirtyError::InvalidPassphrase)?;
+			.map_err(|e| DirtyError::InvalidPassphrase)?;
 
 		let seed = mnemonic.to_entropy_array().0;
 

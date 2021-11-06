@@ -3,4 +3,4 @@
 Cargo.lock
 yarn.lock
 backend
-src/binding-types.ts
+src/binding-types.d.ts

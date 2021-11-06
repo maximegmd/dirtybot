@@ -1,2 +1,2 @@
 .yarn
-src/binding-types.ts
+src/binding-types.d.ts

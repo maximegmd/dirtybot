@@ -1,8 +1,8 @@
 use diesel::Queryable;
 
-#[derive(Queryable, Clone)]
+#[derive(Queryable, Clone, Debug)]
 pub struct User {
-	pub discord_id: String,
+	pub id: String,
 	pub deposit_address: String,
 	pub amount: String,
 }

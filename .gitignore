@@ -1,8 +1,9 @@
 # N-API & Rust
 /target
 .env
-bot.log
 *.node
+*.sqlite
+src/binding-types.d.ts
 
 # Logs
 logs

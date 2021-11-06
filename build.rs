@@ -1,4 +1,3 @@
 fn main() {
-	use napi_build::setup;
-	setup();
+	napi_build::setup();
 }
