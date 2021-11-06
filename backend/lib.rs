@@ -27,20 +27,22 @@ pub fn setup_logger() -> Result<()> {
 		.stringify()
 		.unwrap();
 
-	let pid = std::process::id();
+	let preformatted_json = format!(
+		",\"pid\":{},\"hostname\":{}}}",
+ 		std:process:id(),
+		hostname,
+	);
 
 	fern::Dispatch::new()
 		.format(move |out, message, record| {
 			out.finish(format_args!(
-				"{{\"level\":{},\"time\":{},\"msg\":{},\"pid\":{},\"hostname\":{}}}",
+				"{{\"level\":{},\"time\":{},\"msg\":{}{}",
 				60 - (record.level() as usize) * 10,
 				chrono::Utc::now().timestamp_millis(),
 				JsonValue::String(message.to_string()).stringify().unwrap(),
-				pid,
-				hostname,
+				preformatted_json,
 			))
 		})
-		.level(log::LevelFilter::Debug)
 		.chain(std::io::stdout())
 		.apply()
 		.map_err(|e| Error::from_reason(e.to_string()))?;
