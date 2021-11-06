@@ -6,7 +6,7 @@
 	"main": "build/index.js",
 	"prettier": "@typescord/prettier-config",
 	"scripts": {
-		"dev": "nodemon -w backend -w src -e ts,rs -x \"yarn build-rs-debug && yarn start-ts\"",
+		"dev": "nodemon -w backend -w src -e ts,rs -x \"yarn start-debug\"",
 		"dev-ts": "nodemon -w src -e ts -x \"yarn start-ts\"",
 		"start-debug": "yarn build-rs-debug && yarn start-ts",
 		"start-ts": "node --loader ts-node/esm -r dotenv/config src/index.ts | pino-pretty -t",
