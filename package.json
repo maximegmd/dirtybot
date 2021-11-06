@@ -15,7 +15,6 @@
 		"build-ts": "tsc",
 		"build-rs": "yarn build-rs-debug --release",
 		"build-rs-debug": "napi build --dts src/binding-types.d.ts",
-		"version": "napi version",
 		"lint": "yarn eslint && yarn clippy",
 		"lint-fix": "yarn eslint-fix && yarn clippy-fix",
 		"eslint": "eslint . --ext js,ts",
